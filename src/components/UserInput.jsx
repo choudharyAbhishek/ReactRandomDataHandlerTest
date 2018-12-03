@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import '../styles/ComponentStyles.css';
 import ColumnView from './ColumnDesign.js'
-
+const colStyle = {
+    width: '50px',
+    height: '100px',
+    border: '1px solid #000',
+    margintop: '20px'
+  };
 class UserInput extends Component {
     constructor(props) {
         super(props);
@@ -22,10 +27,14 @@ class UserInput extends Component {
 
     updateTableView() {
         let totalRows = this.state.numberOfRows;
-        let totalColumn = this.getColumnSpecifications();
+        let columnList = this.getColumnSpecifications();
         let rowView = [];
         let columnView = [];
-        console.log(totalColumn);
+        if(totalRows>0){
+            for(var i=0;i<totalRows;i++){
+                rowView.push(<tr id="rowContainer"><td></td></tr>);
+            }
+        }
         //const table = document.createElement("table")
 /*         for(let i=0; i<totalRows; i++){
             var newRow = table.insertRow();
@@ -47,7 +56,7 @@ class UserInput extends Component {
         }.bind(this));
 //return table;
         */
-
+        return rowView;
     }
 
     updateRowsCount(e) {
@@ -114,8 +123,18 @@ class UserInput extends Component {
                     <input type="number" id= "userInputs" placeholder="space between boxes" onChange={this.updateBoxesGap}/>
                 </div>
                 <div >
-                    <ColumnView />
-                    {this.updateTableView()}
+                    <ColumnView styles={colStyle}/>
+                    <table id="tableContainer">
+                        {this.updateTableView()}
+                        <tr>
+                            <th> a</th>
+                            <th> a</th>
+                        </tr>
+                        <tr>
+                            <th>a </th>
+                            <th>a </th>
+                        </tr>
+                    </table>
                 </div>
             </div>
         );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserInput from './components/UserInput'
+import UserInput from './components/UserInput.jsx'
 
 class App extends Component {
   render() {
