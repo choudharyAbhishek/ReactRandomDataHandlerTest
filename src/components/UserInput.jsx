@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React,{ Component } from 'react';
+import ReactDOM from 'react-dom';
 import '../styles/ComponentStyles.css';
 import ColumnView from './ColumnDesign.js'
 const colStyle = {
@@ -23,6 +24,7 @@ class UserInput extends Component {
         this.updateRowsGap = this.updateRowsGap.bind(this);
         this.updateBoxesGap = this.updateBoxesGap.bind(this);
         this.updateTableView = this.updateTableView.bind(this);
+        this.newRef = React.createRef();
     }
 
     updateTableView() {
@@ -32,7 +34,7 @@ class UserInput extends Component {
         let columnView = [];
         if(totalRows>0){
             for(var i=0;i<totalRows;i++){
-                rowView.push(<tr id="rowContainer"><td></td></tr>);
+                rowView.push(<tr id="rowContainer"><td id="columnContainer"></td></tr>);
             }
         }
         //const table = document.createElement("table")
@@ -58,6 +60,29 @@ class UserInput extends Component {
         */
         return rowView;
     }
+
+    createTable() {
+    var num_rows = this.state.numberOfRows;
+    //var num_rows = 6;
+    var num_cols = 5;
+    var theader = '<table border="1">\n';
+    var tbody = '';
+
+    for( var i=0; i<num_rows;i++)
+    {
+        tbody += '<tr id="rowContainer">';
+        for( var j=0; j<num_cols;j++)
+        {
+            tbody += '<td id="columnContainer">';
+            //tbody += 'Cell ' + i + ',' + j;
+            tbody += '</td>'
+        }
+        tbody += '</tr>\n';
+    }
+    var tfooter = '</table>';
+    //document.getElementById('wrapper').innerHTML = theader + tbody + tfooter;
+    ReactDOM.findDOMNode(this.refs.tableView).innerHTML = theader + tbody + tfooter;
+}
 
     updateRowsCount(e) {
         if(e.target.value > 0)
@@ -112,6 +137,14 @@ class UserInput extends Component {
         return(columnSplits)
     }
 
+    componentDidMount() {
+        this.createTable();
+    }
+
+    componentDidUpdate() {
+        this.createTable();
+    }
+
     render() {
         return (
             <div id= "mainContainer">
@@ -123,18 +156,7 @@ class UserInput extends Component {
                     <input type="number" id= "userInputs" placeholder="space between boxes" onChange={this.updateBoxesGap}/>
                 </div>
                 <div >
-                    <ColumnView styles={colStyle}/>
-                    <table id="tableContainer">
-                        {this.updateTableView()}
-                        <tr>
-                            <th> a</th>
-                            <th> a</th>
-                        </tr>
-                        <tr>
-                            <th>a </th>
-                            <th>a </th>
-                        </tr>
-                    </table>
+                    <div ref="tableView"></div>
                 </div>
             </div>
         );
