@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import '../styles/ComponentStyles.css'
+import '../styles/ComponentStyles.css';
+import ColumnView from './ColumnDesign.js'
 
 class UserInput extends Component {
     constructor(props) {
@@ -113,6 +114,7 @@ class UserInput extends Component {
                     <input type="number" id= "userInputs" placeholder="space between boxes" onChange={this.updateBoxesGap}/>
                 </div>
                 <div >
+                    <ColumnView />
                     {this.updateTableView()}
                 </div>
             </div>
