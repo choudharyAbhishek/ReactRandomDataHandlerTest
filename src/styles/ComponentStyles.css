@@ -1,0 +1,12 @@
+#userInputs {
+    border-radius: 25px;
+    border: 2px solid rgb(6, 0, 8);
+    padding: 20px;
+    width: 150px;
+    height: 15px;
+    margin-left:40px
+}
+
+#userInputsContainer {
+    margin-top:40px
+}
