@@ -21,10 +21,10 @@ class UserInput extends Component {
 
     updateTableView() {
         let totalRows = this.state.numberOfRows;
-        let totalColumn = this.state.numberOfColumns;
-        //let spaceBetweenRow = this.state.spaceBetweenRows;
-        //let spaceBetweenBox = this.state.spaceBetweenBoxes;
-        console.log(totalRows);
+        let totalColumn = this.getColumnSpecifications();
+        let rowView = [];
+        let columnView = [];
+        console.log(totalColumn);
         //const table = document.createElement("table")
 /*         for(let i=0; i<totalRows; i++){
             var newRow = table.insertRow();
@@ -44,10 +44,9 @@ class UserInput extends Component {
               </tr>
             );
         }.bind(this));
-
+//return table;
         */
 
-        //return table;
     }
 
     updateRowsCount(e) {
@@ -68,7 +67,6 @@ class UserInput extends Component {
         this.setState({
             numberOfColumns : e.target.value
         });
-        this.getColumnSpecifications();
         this.updateTableView();
     }
 
@@ -106,7 +104,7 @@ class UserInput extends Component {
 
     render() {
         return (
-            <div>
+            <div id= "mainContainer">
             {this.state.errorValue && <h2>{this.state.errorText}</h2>}
                 <div id= "userInputsContainer">
                     <input type="number" id= "userInputs" placeholder="No. of rows" onChange={this.updateRowsCount}/>
@@ -114,7 +112,7 @@ class UserInput extends Component {
                     <input type="number" id= "userInputs" placeholder="space between rows" onChange={this.updateRowsGap}/>
                     <input type="number" id= "userInputs" placeholder="space between boxes" onChange={this.updateBoxesGap}/>
                 </div>
-                <div>
+                <div >
                     {this.updateTableView()}
                 </div>
             </div>
